@@ -9,9 +9,12 @@ namespace XamarinProficiencyExercise.Views
     {
         ItemsViewModel viewModel;
 
+        //Initialize list page
         public ListPage()
         {
             InitializeComponent();
+
+            //Do necessary data binding 
             BindingContext = viewModel = new ItemsViewModel();
         }
 
@@ -23,12 +26,14 @@ namespace XamarinProficiencyExercise.Views
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
-        async void SortItem_Clicked(object sender, EventArgs e)
+        //Method invokes when sort button is clicked
+        void SortItem_Clicked(object sender, EventArgs e)
         {
             viewModel.SortItemsCommand.Execute(null);
         }
 
-        async void RefreshItem_Clicked(object sender, EventArgs e)
+        //Method invokes when refresh button is clicked
+        void RefreshItem_Clicked(object sender, EventArgs e)
         {
             viewModel.LoadItemsCommand.Execute(null);
         }

@@ -22,25 +22,30 @@ namespace XamarinProficiencyExercise
             };
         }
 
-        public async Task<bool> AddItemAsync(Item item)
-        {
-            return await Task.FromResult(true);
-        }
-
         public async Task<Item> GetItemsAsync(bool forceRefresh = false)
         {
+            //Load json from the local file
             var assembly = typeof(ListPage).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream("XamarinProficiencyExercise.Assets.Proficiency.json");
+
+            //Serialize the json string
             var jsonSorted = JsonConvert.SerializeObject(stream);
+
+            //Parse the json and return
             items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(jsonSorted));
             return await Task.FromResult(items);
         }
 
         public async Task<Item> GetItemsAsync(string sortOrder)
         {
+            //Load json from the local file
             var assembly = typeof(ListPage).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream("XamarinProficiencyExercise.Assets.Proficiency.json");
+
+            //Serialize the json string
             var jsonSorted = JsonConvert.SerializeObject(stream);
+
+            //Parse the json and return
             items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(jsonSorted));
             return await Task.FromResult(items);
         }
