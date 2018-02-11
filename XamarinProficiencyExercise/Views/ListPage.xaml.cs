@@ -23,5 +23,10 @@ namespace XamarinProficiencyExercise.Views
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
+        async void AddItem_Clicked(object sender, EventArgs e)
+        {
+            viewModel.SortItemsCommand.Execute(null);
+        }
+
     }
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinProficiencyExercise.Views.ListPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinProficiencyExercise.Views.ListPage" Title="About Canada">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sort" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
             <StackLayout>
             <ListView x:Name="ItemsListView" ItemsSource="{Binding Items}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement">
@@ -7,9 +10,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
-                                <Label Text="{Binding title}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-                                <Label Text="{Binding description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
-                              <!--  <Image Source="{Binding imageHref}"/>-->
+                                <Label Text="{Binding title}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" TextColor = "#2B98F0"/>
+                                <StackLayout Orientation = "Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding description}" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                                    <Image Source="{Binding imageHref}" WidthRequest="100" HeightRequest="100" Aspect="Fill" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
