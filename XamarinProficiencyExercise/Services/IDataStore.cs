@@ -7,5 +7,6 @@ namespace XamarinProficiencyExercise
     {
         Task<bool> AddItemAsync(T item);
         Task<T> GetItemsAsync(bool forceRefresh = false);
+        Task<T> GetItemsAsync(string SortOrder);
     }
 }

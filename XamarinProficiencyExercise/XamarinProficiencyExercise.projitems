@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Assets\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
@@ -32,5 +33,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\no_image.PNG" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewItemPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewItemPage.xaml.cs" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\Proficiency.json" />
   </ItemGroup>
 </Project>

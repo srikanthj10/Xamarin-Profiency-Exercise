@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Xamarin.Forms;
+using XamarinProficiencyExercise.Assets;
 
 namespace XamarinProficiencyExercise
 {
@@ -15,20 +16,12 @@ namespace XamarinProficiencyExercise
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command SortItemsCommand { get; set; }
-
+ 
         public ItemsViewModel()
         {
-            Title = "About Canada";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            SortItemsCommand = new Command(async () => await ExecuteSortItemsCommand());
-                
-            //MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            //{
-            //    var _item = item as Item;
-            //    Items.Add(_item);
-            //    await DataStore.AddItemAsync(_item);
-            //});
+            SortItemsCommand = new Command(async () => await ExecuteSortItemsCommand());                
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -42,15 +35,15 @@ namespace XamarinProficiencyExercise
             {
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                foreach (var rows in items.rows)
+                foreach (var row in items.rows)
                 {
-                    var it = new Item();
-                    if (rows.title != null)
+                    var IndividualItem = new Item();
+                    if (row.title != null)
                     {
-                        it.description = (rows.description == null) ? "No descriptions available" : rows.description;
-                        it.title = rows.title;
-                        it.imageHref = (rows.imageHref == null)? "https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF" : rows.imageHref;
-                        Items.Add(it);
+                        IndividualItem.description = (row.description == null) ? Constants.NoDescription : row.description;
+                        IndividualItem.title = row.title;
+                        IndividualItem.imageHref = (row.imageHref == null)? Constants.NoImageURL : row.imageHref;
+                        Items.Add(IndividualItem);
                     }
                 }
             }
@@ -70,20 +63,19 @@ namespace XamarinProficiencyExercise
                 return;
 
             IsBusy = true;
-
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);                          
-                foreach (var rows in items.rows)
+                var items = await DataStore.GetItemsAsync(SortOrder: Constants.SortAscending );
+                foreach (var row in items.rows)
                 {
-                    var it = new Item();
-                    if (rows.title != null)
+                    var IndividualItem = new Item();
+                    if (row.title != null)
                     {
-                        it.description = (rows.description == null) ? "No descriptions available" : rows.description;
-                        it.title = rows.title;
-                        it.imageHref = (rows.imageHref == null) ? "https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF" : rows.imageHref;
-                        Items.Add(it);
+                        IndividualItem.description = (row.description == null) ? Constants.NoDescription : row.description;
+                        IndividualItem.title = row.title;
+                        IndividualItem.imageHref = (row.imageHref == null) ? Constants.NoImageURL : row.imageHref;
+                        Items.Add(IndividualItem);
                     }
                 }
             }

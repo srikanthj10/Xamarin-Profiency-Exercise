@@ -8,7 +8,6 @@ namespace XamarinProficiencyExercise
     public partial class App : Application
     {
         public static bool UseMockDataStore = false;
-        public static string BackendUrl = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json";
 
         public App()
         {
