@@ -52,7 +52,7 @@ namespace XamarinProficiencyExercise
                     {
                         IndividualItem.description = (row.description == null) ? Constants.NoDescription : row.description;
                         IndividualItem.title = row.title.ToUpper();
-                        IndividualItem.imageHref = (row.imageHref == null)? Constants.NoImageURL : row.imageHref;
+                        IndividualItem.imageHref = (row.imageHref == null)? Constants.NoImageURL : row.imageHref;                       
 
                         //Add to the observable collections
                         Items.Add(IndividualItem);
@@ -91,7 +91,7 @@ namespace XamarinProficiencyExercise
                     {
                         IndividualItem.description = (row.description == null) ? Constants.NoDescription : row.description;
                         IndividualItem.title = row.title.ToUpper();
-                        IndividualItem.imageHref = (row.imageHref == null) ? Constants.NoImageURL : row.imageHref;
+                        IndividualItem.imageHref = (row.imageHref == null) ? Constants.NoImageURL : row.imageHref;                     
 
                         //Add to the observable collections
                         Items.Add(IndividualItem);

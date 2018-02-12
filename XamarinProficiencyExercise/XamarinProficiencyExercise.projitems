@@ -31,8 +31,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\no_image.PNG" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewItemPage.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewItemPage.xaml.cs" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\Proficiency.json" />
   </ItemGroup>
 </Project>
