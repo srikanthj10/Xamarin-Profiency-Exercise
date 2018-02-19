@@ -82,12 +82,12 @@ namespace XamarinProficiencyExercise
             IsBusy = true;
             try
             {
-                //Sort the old list
-                var temp = new ObservableCollection<Row>(Items.OrderBy(x => x.title).ToList());
+                //Sort the old list model
+                var sortedList = new ObservableCollection<Row>(Items.OrderBy(x => x.title).ToList());
 
-                //Clear the existing items and refresh the list
+                //Clear the old list and refresh UI with the new list
                 Items.Clear();
-                foreach (var row in temp)
+                foreach (var row in sortedList)
                 {
                     Items.Add(row);
                 }
