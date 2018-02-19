@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Plugin.Connectivity;
 using Xamarin.Forms;
+using XamarinProficiencyExercise.Assets;
 
 namespace XamarinProficiencyExercise.Views
 {
     public partial class ListPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        ItemsViewModel _ItemsViewModel;
 
         //Initialize list page
         public ListPage()
@@ -15,28 +16,27 @@ namespace XamarinProficiencyExercise.Views
             InitializeComponent();
 
             //Do necessary data binding 
-            BindingContext = viewModel = new ItemsViewModel();
+            _ItemsViewModel = new ItemsViewModel();
+            BindingContext = _ItemsViewModel;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            this.LoadData();
         }
 
-        //Method invokes when sort button is clicked
-        void SortItem_Clicked(object sender, EventArgs e)
-        {
-            viewModel.SortItemsCommand.Execute(null);
+        private async void LoadData() {
+            
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await DisplayAlert(Constants.AlertTitle, Constants.NoConnection, Constants.AlertOk);
+            }
+            else
+            {
+                if (_ItemsViewModel.Items.Count == 0)
+                    _ItemsViewModel.LoadItemsCommand.Execute(null);
+            }
         }
-
-        //Method invokes when refresh button is clicked
-        void RefreshItem_Clicked(object sender, EventArgs e)
-        {
-            viewModel.LoadItemsCommand.Execute(null);
-        }
-
     }
 }

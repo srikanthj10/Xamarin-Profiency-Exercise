@@ -35,7 +35,7 @@ namespace XamarinProficiencyExercise
 
                 //Parse the json and return
                 items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
-            }
+            }    
             return items;
         }
 
@@ -54,7 +54,7 @@ namespace XamarinProficiencyExercise
                 var jsonSorted = JsonConvert.SerializeObject(jsonResult);
 
                 //Parse the json and return
-                items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(jsonSorted));
+                items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
             }
             return items;
         }
