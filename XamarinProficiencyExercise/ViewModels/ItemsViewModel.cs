@@ -74,6 +74,7 @@ namespace XamarinProficiencyExercise.ViewModels
                         Items.Add(row);
                      }
                 }
+                GridHeight = Constants.gridHeight;
             }
             catch (Exception ex)
             {
@@ -81,8 +82,7 @@ namespace XamarinProficiencyExercise.ViewModels
             }
             finally
             {
-                IsBusy = false;
-                GridHeight = Constants.gridHeight;
+                IsBusy = false;               
                 this.UnSortedItems = Items.ToList();
                 IsSorted = false;
             }
@@ -122,6 +122,7 @@ namespace XamarinProficiencyExercise.ViewModels
                     }
                     IsSorted = false;
                 }
+                GridHeight = Constants.gridHeight;
             }
             catch (Exception ex)
             {
@@ -130,7 +131,6 @@ namespace XamarinProficiencyExercise.ViewModels
             finally
             {
                 IsBusy = false;
-                GridHeight = Constants.gridHeight;
             }
         }
     }
