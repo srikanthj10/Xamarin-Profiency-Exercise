@@ -25,6 +25,20 @@ namespace XamarinProficiencyExercise
             set { SetProperty(ref title, value); }
         }
 
+        int gridHeight = 0;
+        public int GridHeight
+        {
+            get { return gridHeight; }
+            set { gridHeight = value; OnPropertyChanged(nameof(GridHeight)); }
+        }
+
+        bool isSorted = false;
+        public bool IsSorted
+        {
+            get { return isSorted; }
+            set { isSorted = value; OnPropertyChanged(nameof(gridHeight)); }
+        } 
+
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName]string propertyName = "",
             Action onChanged = null)

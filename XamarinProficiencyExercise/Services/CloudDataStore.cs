@@ -17,12 +17,14 @@ namespace XamarinProficiencyExercise
     {
         HttpClient client;
         Item items;
+        HttpResponseMessage response;
 
         public CloudDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{Constants.BackendUrl}");
             items = new Item();
+            response = new HttpResponseMessage();
         }
 
         public async Task<Item> GetItemsAsync(bool forceRefresh = false)
@@ -31,10 +33,16 @@ namespace XamarinProficiencyExercise
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
                 //Get data fromn the server
-                var json = await client.GetStringAsync($"");
+                response = client.GetAsync($"").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(response.Content.ReadAsStringAsync().Result));
+                }
+
+                //var json = await client.GetStringAsync($"");
 
                 //Parse the json and return
-                items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+                //items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
             }    
             return items;
         }

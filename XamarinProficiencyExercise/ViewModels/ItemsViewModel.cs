@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,20 +12,25 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using XamarinProficiencyExercise.Assets;
 
-namespace XamarinProficiencyExercise
+namespace XamarinProficiencyExercise.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
         public ObservableCollection<Row> Items { get; set; }
+        public List<Row> UnSortedItems { get; set; }
         public Command LoadItemsCommand { get; set; }
         public ICommand SortItemsCommand { get; set; }
         public ICommand RefreshItemsCommand { get; set; }
         public String PageTitle { get; set; }
-
+  
         public ItemsViewModel()
         {
             //Observable collectionf or the list view
             Items = new ObservableCollection<Row>();
+            UnSortedItems = new List<Row>();         
+
+            //Load Data from the server
+            InitializeListView();
 
             //Command for Load/refresh list view
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -36,6 +42,10 @@ namespace XamarinProficiencyExercise
             RefreshItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
+        async void InitializeListView() {
+            await ExecuteLoadItemsCommand();
+        }
+
         async Task ExecuteLoadItemsCommand()
         {
             Contract.Ensures(Contract.Result<Task>() != null);
@@ -43,6 +53,7 @@ namespace XamarinProficiencyExercise
                 return;
             
             IsBusy = true;
+            GridHeight = Constants.initlaGridHeight;
 
             try
             {
@@ -50,7 +61,7 @@ namespace XamarinProficiencyExercise
                 Items.Clear();
 
                 //Get data from server
-                var items = await DataStore.GetItemsAsync(true);
+                var items = Task.Run( async () => await DataStore.GetItemsAsync(true)).Result;
                 PageTitle = items.title.ToUpper();
 
                 //Validate and Take all the valid datas from the response
@@ -70,7 +81,10 @@ namespace XamarinProficiencyExercise
             }
             finally
             {
-                IsBusy = false;             
+                IsBusy = false;
+                GridHeight = Constants.gridHeight;
+                this.UnSortedItems = Items.ToList();
+                IsSorted = false;
             }
         }
 
@@ -80,16 +94,33 @@ namespace XamarinProficiencyExercise
                 return;
       
             IsBusy = true;
+            GridHeight = Constants.initlaGridHeight;
+            
             try
             {
-                //Sort the old list model
-                var sortedList = new ObservableCollection<Row>(Items.OrderBy(x => x.title).ToList());
+                //Check if the UI has sorted items displayed
+                if(!IsSorted){
+                    
+                    //Sort the old list model
+                    var sortedItems = new ObservableCollection<Row>(Items.OrderBy(x => x.title).ToList());
 
-                //Clear the old list and refresh UI with the new list
-                Items.Clear();
-                foreach (var row in sortedList)
+                    //Clear the old list and refresh UI with the new list
+                    Items.Clear();
+                    foreach (var row in sortedItems)
+                    {
+                        Items.Add(row);
+                    }
+                    IsSorted = true;
+                }
+                else
                 {
-                    Items.Add(row);
+                    //Clear the old list and refresh UI with the unsorted list
+                    Items.Clear();
+                    foreach (var row in this.UnSortedItems)
+                    {
+                        Items.Add(row);
+                    }
+                    IsSorted = false;
                 }
             }
             catch (Exception ex)
@@ -99,6 +130,7 @@ namespace XamarinProficiencyExercise
             finally
             {
                 IsBusy = false;
+                GridHeight = Constants.gridHeight;
             }
         }
     }

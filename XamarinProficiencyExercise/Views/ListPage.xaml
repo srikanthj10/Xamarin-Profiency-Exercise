@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinProficiencyExercise.Views.ListPage" Title="About Canada">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:XamarinProficiencyExercise" xmlns:ViewModels="clr-namespace:XamarinProficiencyExercise.ViewModels; assembly=XamarinProficiencyExercise" x:Class="XamarinProficiencyExercise.Views.ListPage" Title="About Canada">
+             <ContentPage.BindingContext>
+                <ViewModels:ItemsViewModel/>
+            </ContentPage.BindingContext>
     <ContentPage.Content>
             <StackLayout>
-            <ListView x:Name="ItemsListView" ItemsSource="{Binding Items}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement">
+            <ListView x:Name="ItemsListView" ItemsSource="{Binding Items}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand = "{Binding LoadItemsCommand}" IsPullToRefreshEnabled="false" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -19,14 +22,14 @@
             </ListView>
             <Grid>
               <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
+                <RowDefinition Height="{Binding GridHeight}"/>
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
               </Grid.ColumnDefinitions>
             <Button Text="Sort" BorderRadius="0" Command="{Binding SortItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#2B98F0" Grid.Row="0" Grid.Column="0"/>                    
-            <Button Text="Refresh" BorderRadius="0"  Command="{Binding RefreshItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#2B98F0" Grid.Row="0" Grid.Column="1"/>
+            <Button Text="Refresh" BorderRadius="0" Command="{Binding RefreshItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#2B98F0" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </StackLayout>
-	</ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>
