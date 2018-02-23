@@ -10,7 +10,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
-                                <Label Text="{Binding title}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" TextColor = "#2B98F0"/>
+                                <Label Text="{Binding title}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" TextColor = "#815a98"/>
                                 <StackLayout Orientation = "Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
                                     <Label Text="{Binding description}" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
                                     <Image Source="{Binding imageHref}" WidthRequest="100" HeightRequest="100" Aspect="Fill" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
@@ -27,8 +27,8 @@
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
               </Grid.ColumnDefinitions>
-            <Button Text="Sort" BorderRadius="0" Command="{Binding SortItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#2B98F0" Grid.Row="0" Grid.Column="0"/>                    
-            <Button Text="Refresh" BorderRadius="0" Command="{Binding RefreshItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#2B98F0" Grid.Row="0" Grid.Column="1"/>
+            <Button Text="Sort" BorderRadius="0" Command="{Binding SortItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#815a98" Grid.Row="0" Grid.Column="0"/>                    
+            <Button Text="Refresh" BorderRadius="0" Command="{Binding RefreshItemsCommand}" TextColor="#ffffff"  BackgroundColor = "#815a98" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
