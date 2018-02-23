@@ -28,6 +28,9 @@ namespace XamarinProficiencyExercise
             var assembly = typeof(ListPage).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream("XamarinProficiencyExercise.Assets.Proficiency.json");
 
+            //Assembly _assembly = Assembly.GetExecutingAssembly();
+            //Stream stream = _assembly.GetManifestResourceStream("XamarinProficiencyExercise.Assets.Proficiency.json");
+
             //Serialize the json string
             var jsonSorted = JsonConvert.SerializeObject(stream);
 

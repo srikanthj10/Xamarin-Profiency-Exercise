@@ -36,13 +36,9 @@ namespace XamarinProficiencyExercise
                 response = client.GetAsync($"").Result;
                 if (response.IsSuccessStatusCode)
                 {
+                    //Parse the json and return
                     items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(response.Content.ReadAsStringAsync().Result));
                 }
-
-                //var json = await client.GetStringAsync($"");
-
-                //Parse the json and return
-                //items = await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
             }    
             return items;
         }

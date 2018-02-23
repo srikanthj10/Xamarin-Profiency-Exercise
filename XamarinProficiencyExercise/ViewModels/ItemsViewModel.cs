@@ -21,7 +21,6 @@ namespace XamarinProficiencyExercise.ViewModels
         public Command LoadItemsCommand { get; set; }
         public ICommand SortItemsCommand { get; set; }
         public ICommand RefreshItemsCommand { get; set; }
-        public String PageTitle { get; set; }
   
         public ItemsViewModel()
         {
@@ -71,6 +70,7 @@ namespace XamarinProficiencyExercise.ViewModels
                      {
                         row.description = (row.description == null) ? Constants.NoDescription : row.description;
                         row.imageHref = (row.imageHref == null) ? Constants.NoImageURL : row.imageHref;
+                        row.title = row.title.ToUpper();
                         Items.Add(row);
                      }
                 }

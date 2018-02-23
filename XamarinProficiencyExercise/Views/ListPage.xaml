@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:XamarinProficiencyExercise" xmlns:ViewModels="clr-namespace:XamarinProficiencyExercise.ViewModels; assembly=XamarinProficiencyExercise" x:Class="XamarinProficiencyExercise.Views.ListPage" Title="About Canada">
-             <ContentPage.BindingContext>
-                <ViewModels:ItemsViewModel/>
-            </ContentPage.BindingContext>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:XamarinProficiencyExercise" xmlns:ViewModels="clr-namespace:XamarinProficiencyExercise.ViewModels; assembly=XamarinProficiencyExercise" x:Class="XamarinProficiencyExercise.Views.ListPage" Title="{Binding PageTitle}">
+    <ContentPage.BindingContext>
+            <ViewModels:ItemsViewModel/>
+     </ContentPage.BindingContext>
     <ContentPage.Content>
             <StackLayout>
             <ListView x:Name="ItemsListView" ItemsSource="{Binding Items}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand = "{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement">

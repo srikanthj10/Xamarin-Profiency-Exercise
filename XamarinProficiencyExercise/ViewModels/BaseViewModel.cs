@@ -37,7 +37,14 @@ namespace XamarinProficiencyExercise
         {
             get { return isSorted; }
             set { isSorted = value; OnPropertyChanged(nameof(gridHeight)); }
-        } 
+        }
+
+        String pageTitle = "Title";
+        public String PageTitle 
+        { 
+            get{ return pageTitle; }
+            set{ pageTitle = value; OnPropertyChanged(nameof(PageTitle)); }
+        }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName]string propertyName = "",
